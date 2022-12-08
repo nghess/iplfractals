@@ -1,1 +1,1 @@
-from ipfractals.fractal import *
+from fractal.fractal import *
