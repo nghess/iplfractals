@@ -76,6 +76,8 @@ class Generate:
             if index != -1:
                 assert 0 < index <= 100, "Index must be between 1-100"
                 frame = int((index/100)*self.size)
+            else:
+                frame = -1
             preview = cv2.resize(self.pattern[frame, :, :], [size, size], interpolation=cv2.INTER_AREA)
             prev_bw = (preview > .5)
             previews = [preview, prev_bw]
