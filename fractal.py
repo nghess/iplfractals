@@ -156,8 +156,8 @@ size = 256
 #print(dyn.boxcount()[0])git st
 #print(dyn.avg_boxcount())
 
-stat = Generate(beta=3, seed=211, size=size, dimension=2)
-#print(stat.boxcount()[0])
+#stat = Generate(beta=3, seed=211, size=size, dimension=2)
+#print(stat.boxcount())
 
 """
 test.write()
