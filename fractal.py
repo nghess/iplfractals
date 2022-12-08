@@ -110,7 +110,7 @@ class Generate:
             counts.append(count(fractal, size))
         m, b = np.polyfit(np.log(sizes), np.log(counts), 1)
         #print(f"D = {round(-m,3)}")
-        return -m, b, sizes, counts
+        return -m
 
     def avg_boxcount(self):
 
