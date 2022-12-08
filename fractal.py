@@ -62,9 +62,6 @@ class Generate:
                 cv2.waitKey(16)
 
     def preview2d(self, index=-1, size=256):
-        assert 0 < index <= 100, "Index must be between 1-100"
-        if index != -1:
-            frame = int((index/100)*self.size)
         # 2d grayscale and BW previews
         if self.dimension == 2:
             preview = cv2.resize(self.pattern, [size, size], interpolation=cv2.INTER_AREA)
@@ -76,6 +73,9 @@ class Generate:
             plt.show()
         # 2d slices of 3d fractals for preview
         if self.dimension == 3:
+            assert 0 < index <= 100, "Index must be between 1-100"
+            if index != -1:
+                frame = int((index/100)*self.size)
             preview = cv2.resize(self.pattern[frame, :, :], [size, size], interpolation=cv2.INTER_AREA)
             prev_bw = (preview > .5)
             previews = [preview, prev_bw]
