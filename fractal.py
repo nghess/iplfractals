@@ -150,14 +150,14 @@ begin = time.time()
 print(finish - begin)
 finish = time.time()
 """
-size = 256
+#size = 256
 
-dyn = Generate(beta=4, seed=211, size=size, dimension=3)
-print(dyn.boxcount()[0])
+#dyn = Generate(beta=4, seed=211, size=size, dimension=3)
+#print(dyn.boxcount()[0])
 #print(dyn.avg_boxcount())
 
-stat = Generate(beta=3, seed=211, size=size, dimension=2)
-print(stat.boxcount()[0])
+#stat = Generate(beta=3, seed=211, size=size, dimension=2)
+#print(stat.boxcount()[0])
 
 """
 test.write()
