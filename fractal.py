@@ -73,8 +73,8 @@ class Generate:
             plt.show()
         # 2d slices of 3d fractals for preview
         if self.dimension == 3:
-            assert 0 < index <= 100, "Index must be between 1-100"
             if index != -1:
+                assert 0 < index <= 100, "Index must be between 1-100"
                 frame = int((index/100)*self.size)
             preview = cv2.resize(self.pattern[frame, :, :], [size, size], interpolation=cv2.INTER_AREA)
             prev_bw = (preview > .5)
