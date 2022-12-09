@@ -68,7 +68,7 @@ class Generate:
             prev_bw = (preview > .5)
             previews = [preview, prev_bw]
             for i in range(2):
-                plt.subplot(1, 2, i+1), plt.imshow(previews[i], 'Grays')
+                plt.subplot(1, 2, i+1), plt.imshow(previews[i], 'Greys')
                 plt.xticks([]), plt.yticks([])
             plt.show()
         # 2d slices of 3d fractals for preview
