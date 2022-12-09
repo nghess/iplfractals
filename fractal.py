@@ -68,7 +68,7 @@ class Generate:
             prev_bw = (preview > .5)
             previews = [preview, prev_bw]
             for i in range(2):
-                plt.subplot(1, 2, i+1), plt.imshow(previews[i], 'gray')
+                plt.subplot(1, 2, i+1), plt.imshow(previews[i], 'Grays')
                 plt.xticks([]), plt.yticks([])
             plt.show()
         # 2d slices of 3d fractals for preview
@@ -82,25 +82,28 @@ class Generate:
             prev_bw = (preview > .5)
             previews = [preview, prev_bw]
             for i in range(2):
-                plt.subplot(1, 2, i+1), plt.imshow(previews[i], 'gray')
+                plt.subplot(1, 2, i+1), plt.imshow(previews[i], 'Grays')
                 plt.xticks([]), plt.yticks([])
             plt.show()
 
     def preview3d(self):
+        # Check if 3 dimensional, and resize to 64x64x64
+        assert self.pattern == 3, "Fractal must be 3 dimensional"
         prev3d = resize(self.pattern, (64, 64, 64))
+
         # Create vectors for 3d plot
         z, x, y = prev3d.nonzero()
         color = prev3d.flatten()
         color = color[:]
+
         #Display 3d Fractal
         fig = plt.figure()
-        plt.rcParams["figure.figsize"]=5,5
+        plt.rcParams["figure.figsize"] = 5, 5
         ax = fig.add_subplot(111, projection='3d')
         ax.scatter(x, y, z, c=color, alpha=1, cmap="Greys")
         plt.show()
 
     def boxcount(self, threshold=.5, frame=False):
-
         # 2d box count function
         if self.pattern.ndim == 2 or frame:
             def count(img, k):
@@ -168,12 +171,12 @@ begin = time.time()
 print(finish - begin)
 finish = time.time()
 """
-size = 256
+#size = 256
 
-dyn = Generate(beta=4, seed=211, size=size, dimension=3)
+#dyn = Generate(beta=4, seed=211, size=size, dimension=3)
 #print(dyn.boxcount()[0])git st
 #print(dyn.avg_boxcount())
-dyn.preview3d()
+#dyn.preview3d()
 
 #stat = Generate(beta=3, seed=211, size=size, dimension=2)
 #print(stat.boxcount())
