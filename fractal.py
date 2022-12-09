@@ -26,7 +26,6 @@ class Generate:
         assert self.dimension == 2 or self.dimension == 3, "Dimension must be either 2 or 3"
         np.seterr(divide='ignore')
 
-
         if dimension == 2 and method == "ifft":
             # Build power spectrum
             f = [x/size for x in range(0, int(size/2)+1)] + [x/size for x in range(-int(size/2), 0)]
