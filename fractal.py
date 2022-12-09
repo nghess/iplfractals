@@ -165,7 +165,6 @@ class Generate:
             boxcounts.append(slope2d)
         return np.mean(boxcounts)
 
-
     def write(self, location="E:/fractals"):
 
         # Check if root directory exists
