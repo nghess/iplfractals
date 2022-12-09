@@ -139,7 +139,7 @@ class Generate:
     def avgBoxcount(self):
 
         # Check if fractal is 3d
-        assert self.ndim == 3, "Average box count is for 3d fractals only."
+        assert self.pattern.ndim == 3, "Average box count is for 3d fractals only."
 
         boxcounts = []
 
