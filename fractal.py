@@ -133,21 +133,37 @@ class Generate:
         for size in sizes:
             counts.append(count(fractal, size))
         m, b = np.polyfit(np.log(sizes), np.log(counts), 1)
-        #print(f"D = {round(-m,3)}")
         return -m
 
     def avgBoxcount(self):
-
         # Check if fractal is 3d
         assert self.pattern.ndim == 3, "Average box count is for 3d fractals only."
+
+        def abc(fractal):
+            def count(fractal, k):
+                box = np.add.reduceat(
+                    np.add.reduceat(fractal, np.arange(0, fractal.shape[0], k), axis=0),
+                    np.arange(0, fractal.shape[1], k), axis=1)
+                return len(np.where((box > 0) & (box < k*k))[0])
+
+            # Threshold and box count
+            fractal = (self.pattern < .5)
+            p = min(fractal.shape)
+            n = 2**np.floor(np.log(p)/np.log(2))
+            n = int(np.log(n)/np.log(2))
+            sizes = 2**np.arange(n-1, 0, -1)
+            counts = []
+            for size in sizes:
+                counts.append(count(fractal, size))
+            m, b = np.polyfit(np.log(sizes), np.log(counts), 1)
+            return -m
 
         boxcounts = []
 
         for i in range(0, len(self.pattern), 3):
             frame = self.pattern[i, :, :]
-            slope2d, intercept2d, sz2d, count2d = self.boxcount(frame, frame=True)
+            slope2d = abc(frame)
             boxcounts.append(slope2d)
-
         return np.mean(boxcounts)
 
 
@@ -178,9 +194,9 @@ finish = time.time()
 """
 #size = 256
 
-#dynamic = Generate(beta=4, seed=211, size=size, dimension=3)
-#print(dyn.boxcount()[0])git st
-#print(dyn.avg_boxcount())
+#dynamic = Generate(beta=4, seed=211, size=256, dimension=3)
+#print(dynamic.boxcount())
+#print(dynamic.avgBoxcount())
 #dyn.preview3d()
 
 #stat = Generate(beta=3, seed=211, size=size, dimension=2)
