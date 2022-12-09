@@ -4,7 +4,7 @@ import time
 import numpy as np
 from numpy import inf
 import matplotlib.pyplot as plt
-
+from skimage.transform import resize
 
 class Generate:
     # Generate 2d or 3d fractal
@@ -86,6 +86,19 @@ class Generate:
                 plt.xticks([]), plt.yticks([])
             plt.show()
 
+    def preview3d(self):
+        prev3d = resize(self.pattern, (64, 64, 64))
+        # Create vectors for 3d plot
+        z, x, y = prev3d.nonzero()
+        color = prev3d.flatten()
+        color = color[:]
+        #Display 3d Fractal
+        fig = plt.figure()
+        plt.rcParams["figure.figsize"]=5,5
+        ax = fig.add_subplot(111, projection='3d')
+        ax.scatter(x, y, z, c=color, alpha=1, cmap="Greys")
+        plt.show()
+
     def boxcount(self, threshold=.5, frame=False):
 
         # 2d box count function
@@ -157,9 +170,10 @@ finish = time.time()
 """
 size = 256
 
-#dyn = Generate(beta=4, seed=211, size=size, dimension=3)
+dyn = Generate(beta=4, seed=211, size=size, dimension=3)
 #print(dyn.boxcount()[0])git st
 #print(dyn.avg_boxcount())
+dyn.preview3d()
 
 #stat = Generate(beta=3, seed=211, size=size, dimension=2)
 #print(stat.boxcount())
