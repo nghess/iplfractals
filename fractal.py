@@ -4,7 +4,10 @@ import time
 import numpy as np
 from numpy import inf
 import matplotlib.pyplot as plt
+from matplotlib import animation
+from IPython.display import HTML
 from skimage.transform import resize
+
 
 class Generate:
     # Generate 2d or 3d fractal
@@ -133,10 +136,10 @@ class Generate:
         #print(f"D = {round(-m,3)}")
         return -m
 
-    def avg_boxcount(self):
+    def avgBoxcount(self):
 
         # Check if fractal is 3d
-        #assert self.ndim == 3, "Average box count is for 3d fractals only."
+        assert self.ndim == 3, "Average box count is for 3d fractals only."
 
         boxcounts = []
 
@@ -165,15 +168,17 @@ class Generate:
             for i in range(self.size):
                 cv2.imwrite(f"{folder}{self.beta}_{self.seed}_{i:03d}.png", self.pattern[i, :, :]*255)
 
+
+
 """
-#Testing:
+#Testing Ground:
 begin = time.time()
 print(finish - begin)
 finish = time.time()
 """
 #size = 256
 
-#dyn = Generate(beta=4, seed=211, size=size, dimension=3)
+#dynamic = Generate(beta=4, seed=211, size=size, dimension=3)
 #print(dyn.boxcount()[0])git st
 #print(dyn.avg_boxcount())
 #dyn.preview3d()
@@ -184,4 +189,19 @@ finish = time.time()
 """
 test.write()
 """
+"""
+a = dynamic.pattern[0, :, :]
+im = plt.imshow(a, interpolation='none', aspect='auto', vmin=0, vmax=1)
 
+def drawframe(i):
+    frame = dynamic.pattern[i, :, :]
+    im.set_array(frame)
+    return [im]
+
+fig = plt.figure(figsize=(5,5))
+
+anim = animation.FuncAnimation(fig, drawframe, frames=256, interval=16)
+#HTML(anim.to_html5_video())
+
+plt.show()
+"""
