@@ -88,7 +88,7 @@ class Generate:
 
     def preview3d(self):
         # Check if 3 dimensional, and resize to 64x64x64
-        assert self.pattern == 3, "Fractal must be 3 dimensional"
+        assert self.pattern.ndim == 3, "Fractal must be 3 dimensional"
         prev3d = resize(self.pattern, (64, 64, 64))
 
         # Create vectors for 3d plot
